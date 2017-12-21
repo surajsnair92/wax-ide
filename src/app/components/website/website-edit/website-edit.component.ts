@@ -11,7 +11,7 @@ import {WebsiteService} from '../../../services/website.service.client';
 })
 export class WebsiteEditComponent implements OnInit {
   @ViewChild('f') websiteEditForm: NgForm;
-  website = {};
+  application = {};
   userId: string;
   user: any;
   wid: string;
@@ -31,14 +31,14 @@ export class WebsiteEditComponent implements OnInit {
           this.wid = params['wid'];
         }
       );
-    this.webService.findWebsiteById(this.wid)
+    this.webService.findApplicationById(this.wid)
       .subscribe(
         (website: any) => {
-          this.website = website;
+          this.application = website;
         }
       );
 
-    this.webService.findWebsitesByUser(this.userId)
+    this.webService.findApplicationsByUser(this.userId)
       .subscribe(
         (websites: any) => {
           this.websites = websites;
@@ -47,19 +47,19 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   update() {
-    this.webService.updateWebsite(this.wid, this.website)
+    this.webService.updateApplication(this.wid, this.application)
       .subscribe(
         (website: any) => {
-          this.router.navigate(['user/' + this.userId, 'website']);
+          this.router.navigate(['user/' + this.userId, 'application']);
         }
       );
   }
 
   delete() {
-    this.webService.deleteWebsite(this.wid)
+    this.webService.deleteApplication(this.wid)
       .subscribe(
         (website: any) => {
-          this.router.navigate(['user/' + this.userId, 'website']);
+          this.router.navigate(['user/' + this.userId, 'application']);
         }
       );
   }

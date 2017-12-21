@@ -16,7 +16,7 @@ export class WebsiteNewComponent implements OnInit {
   websites = [{}];
   name: string;
   description: string;
-  website: any;
+  application: any;
 
   constructor(private webService: WebsiteService,
               private activatedRoute: ActivatedRoute,
@@ -30,29 +30,26 @@ export class WebsiteNewComponent implements OnInit {
           this.userId = params['userId'];
         }
       );
-    this.webService.findWebsitesByUser(this.userId)
-      .subscribe(
-        (websites: any) => {
+    this.webService.findApplicationsByUser(this.userId)
+      .subscribe((websites: any) => {
           this.websites = websites;
         }
       );
-
   }
 
   create() {
     console.log('inside web of web new');
     this.name = this.websiteForm.value.name;
     this.description = this.websiteForm.value.description;
-    const website = {
-      name: this.name,
+    const application = {
+      applicationName: this.name,
       description: this.description
     }
-    console.log(website.name);
+    console.log(application.applicationName);
     console.log(this.websiteForm.value.description);
-    this.website = this.webService.createWebsite(this.userId, website)
-      .subscribe(
-        (new_website: any) => {
-          this.router.navigate(['user/' + this.userId, 'website']);
+    this.application = this.webService.createApplication(this.userId, application)
+      .subscribe((new_website: any) => {
+          this.router.navigate(['user/' + this.userId, 'application']);
         }
       );
   }

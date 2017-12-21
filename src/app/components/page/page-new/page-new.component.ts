@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {NgForm} from '@angular/forms';
 import {PageService} from '../../../services/page.service.client';
+import {WebsiteService} from '../../../services/website.service.client';
 
 
 @Component({
@@ -15,8 +16,8 @@ export class PageNewComponent implements OnInit {
   userId: string;
   pages = [{}];
   page: any;
-  name: string;
-  description: string;
+  name: {};
+  route: string;
   wid: string;
   user: any;
 
@@ -24,7 +25,7 @@ export class PageNewComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private router: Router,
-              private pageService: PageService) { }
+              private pageService: PageService, private webService: WebsiteService) { }
 
   ngOnInit() {
     this.activatedRoute.params
@@ -46,18 +47,27 @@ export class PageNewComponent implements OnInit {
   create() {
     console.log('new page');
     this.name = this.pageForm.value.pageName;
-    this.description = this.pageForm.value.pageDesc;
-    const page = {
-      name: this.name,
-      description: this.description
+    this.route = this.pageForm.value.pageDesc;
+    this.name = {
+        route: this.route
     };
-    this.page = this.pageService.createPage(this.wid, page)
-      .subscribe(
-        (new_page: any) => {
-          console.log(new_page);
-          this.router.navigate(['user/', this.userId, 'website', this.wid, 'page']);
-        }
-      );
+    //   const pages = {
+    //       name: this.name,
+    //           route: this.route
+    //       };
+    this.page = this.webService.addPagesToApplication(this.wid, this.name)
+        .subscribe((new_page: any) => {
+            console.log(new_page);
+            this.router.navigate(['user/', this.userId, 'application', this.wid, 'page']);
+          });
+    // const page = {
+    //   name: this.name, route: this.route
+    // };
+    // this.page = this.pageService.createPage(this.wid, page)
+    //   .subscribe((new_page: any) => {
+    //       console.log(new_page);
+    //       this.router.navigate(['user/', this.userId, 'application', this.wid, 'page']);
+    //     });
   }
 
 }

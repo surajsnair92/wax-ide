@@ -4,7 +4,7 @@
     <div class="col-sm-5 hidden-xs">
 
       <div class="dg-nav-items navbar-text pull-left" style="margin-left: 0px">
-        <a [routerLink]="['/user', userId, 'website', websiteId, 'page']">
+        <a [routerLink]="['/user', userId, 'application', websiteId, 'page']">
           <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
       </div>
@@ -17,7 +17,7 @@
       </div>
 
       <div class="dg-nav-items navbar-text pull-right" style="margin-right: 0px">
-        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', 'new']">
+        <a [routerLink]="['/user', userId, 'application', websiteId, 'page', 'new']">
           <span class="glyphicon glyphicon-plus"></span>
         </a>
       </div>
@@ -79,8 +79,8 @@
   </div>
 
   <div class="dg-right-pane-items">
-    <label>Description</label>
-    <textarea placeholder="Page Description"
+    <label>Route</label>
+    <textarea placeholder="Routing name"
               name="pageDesc"
               id = "pageDesc"
               type="text"

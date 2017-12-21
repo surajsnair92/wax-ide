@@ -28,25 +28,16 @@ export class WebsiteListComponent implements OnInit {
         }
       );
     this.userService.findUserById(this.userId)
-      .subscribe(
-        (user: any) => {
+      .subscribe((user: any) => {
           this.user = user;
         }
       );
 
+    this.webService.findApplicationsByUser(this.userId)
+      .subscribe((websites: any) => {
 
-    // this.activatedRoute.params
-    //   .subscribe(params => {
-    //     this.user = this.sharedService.user || {};
-    //     console.log(this.user.username);
-    //     console.log(this.user._id);
-    //   });
-
-
-    this.webService.findWebsitesByUser(this.userId)
-      .subscribe(
-        (websites: any) => {
           this.websites = websites;
+          console.log(this.websites);
         }
       );
   }

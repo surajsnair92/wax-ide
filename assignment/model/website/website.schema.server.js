@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
 
-var websiteSchema = mongoose.Schema({
+var applicationSchema = mongoose.Schema({
   developerId:{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'},
-  name: String,
+  applicationName: String,
   description: String,
   dateCreated: {type: Date,default: Date.now()},
-  pages:[{type:mongoose.Schema.Types.ObjectId, ref:'PageModel'}]
-},{collection: "website"});
+  pages: Object
+  // pages:[{type:mongoose.Schema.Types.ObjectId, ref:'PageModel'}]
+},{collection: "application"});
 
-module.exports = websiteSchema;
+module.exports = applicationSchema;

@@ -1,38 +1,38 @@
 var mongoose = require('mongoose');
-var WebsiteSchema = require('./website.schema.server');
+var ApplicationSchema = require('./website.schema.server');
 var db  = require('../models.server');
 
-var WebsiteModel = mongoose.model('WebsiteModel', WebsiteSchema);
+var ApplicationModel = mongoose.model('WebsiteModel', ApplicationSchema);
 
-WebsiteModel.findWebsiteById = findWebsiteById;
-WebsiteModel.createWebsiteForUser = createWebsiteForUser;
-WebsiteModel.findAllWebsitesForUser = findAllWebsitesForUser;
-WebsiteModel.deleteWebsite = deleteWebsite;
-WebsiteModel.updateWebsite = updateWebsite;
+ApplicationModel.findApplicationById = findApplicationById;
+ApplicationModel.createApplicationForUser = createApplicationForUser;
+ApplicationModel.findAllApplicationsForUser = findAllApplicationsForUser;
+ApplicationModel.deleteApplication = deleteApplication;
+ApplicationModel.updateApplication = updateApplication;
 
-module.exports = WebsiteModel;
+module.exports = ApplicationModel;
 
 
-function findWebsiteById(id) {
-  return WebsiteModel.findOne({_id: id});
+function findApplicationById(id) {
+  return ApplicationModel.findOne({_id: id});
 }
 
-function createWebsiteForUser(userId, website) {
+function createApplicationForUser(userId, application) {
   console.log("inside web of model");
-  website.developerId = userId;
-  return WebsiteModel.create(website)
+  application.developerId = userId;
+  return ApplicationModel.create(application)
     .then();
 }
 
-function findAllWebsitesForUser(userId) {
-  return WebsiteModel.find({developerId: userId});
+function findAllApplicationsForUser(userId) {
+  return ApplicationModel.find({developerId: userId});
 }
 
-function deleteWebsite(id) {
-  return WebsiteModel.remove({_id: id});
+function deleteApplication(id) {
+  return ApplicationModel.remove({_id: id});
 }
 
-function updateWebsite(id, website) {
+function updateApplication(id, application) {
   console.log('inside update of web');
-  return WebsiteModel.update({_id: id}, website);
+  return ApplicationModel.update({_id: id}, application);
 }

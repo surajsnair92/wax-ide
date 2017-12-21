@@ -14,65 +14,65 @@ export class WebsiteService {
 
   baseUrl = environment.baseUrl;
 
-  api = {
-    'createWebsite'   : this.createWebsite,
-    'findWebsiteById' : this.findWebsiteById,
-    'findWebsitesByUser' : this.findWebsitesByUser,
-    'updateWebsite' : this.updateWebsite,
-    'deleteWebsite' : this.deleteWebsite
-  };
+  // api = {
+  //   'createWebsite'   : this.createWebsite,
+  //   "findApplicationById" : this.findApplicationById,
+  //   'findWebsitesByUser' : this.findWebsitesByUser,
+  //   "updateApplication" : this.updateApplication,
+  //   "deleteApplication" : this.deleteApplication
+  // };
 
-  createWebsite(userID: String, website: any) {
+  createApplication(userID: String, website: any) {
     console.log('inside web of website client');
     website.developerId = userID;
-    return this.http.post(this.baseUrl + '/api/user/' + userID + '/website', website)
-      .map(
-        (res: Response) => {
+    return this.http.post(this.baseUrl + '/api/user/' + userID + '/application', website)
+      .map((res: Response) => {
+          const data = res.json();
+          return data;
+        });
+  }
+
+  findApplicationById(appId: String) {
+    return this.http.get(this.baseUrl + '/api/application/' + appId)
+      .map((res: Response) => {
+          const data = res.json();
+          return data;
+        });
+  }
+
+  findApplicationsByUser(userId: String) {
+    return this.http.get(this.baseUrl + '/api/user/' + userId + '/application')
+      .map((res: Response) => {
           const data = res.json();
           return data;
         }
       );
   }
 
-  findWebsiteById(websiteId: String) {
-    return this.http.get(this.baseUrl + '/api/website/' + websiteId)
-      .map(
-        (res: Response) => {
-          const data = res.json();
-          return data;
-        }
-      );
-  }
-
-  findWebsitesByUser(userId: String) {
-    return this.http.get(this.baseUrl + '/api/user/' + userId + '/website')
-      .map(
-        (res: Response) => {
-          const data = res.json();
-          return data;
-        }
-      );
-  }
-
-  updateWebsite(websiteId: String, website: any) {
+  updateApplication(appId: String, application: any) {
     console.log('update web of website client');
-    return this.http.put(this.baseUrl + '/api/website/' + websiteId, website)
-      .map(
-        (res: Response) => {
+    return this.http.put(this.baseUrl + '/api/application/' + appId, application)
+      .map((res: Response) => {
           const data = res.json();
           return data;
         }
       );
   }
 
-  deleteWebsite(websiteId: String) {
-    return this.http.delete(this.baseUrl + '/api/website/' + websiteId)
-      .map(
-        (res: Response) => {
+  deleteApplication(appId: String) {
+    return this.http.delete(this.baseUrl + '/api/application/' + appId)
+      .map((res: Response) => {
           const data = res.json();
           return data;
         }
       );
+  }
+  addPagesToApplication(appId, page) {
+      return this.http.put(this.baseUrl + '/api/application/' + appId + '/page', page)
+          .map((res: Response) => {
+                  const data = res.json();
+                  return data;
+              });
   }
 
 }

@@ -51,7 +51,7 @@ export class PageEditComponent implements OnInit {
     this.pageService.updatePage(this.pid, this.page)
       .subscribe(
         (page: any) => {
-          this.router.navigate(['user/' + this.userId, 'website', this.wid, 'page']);
+          this.router.navigate(['user/' + this.userId, 'application', this.wid, 'page']);
         }
       );
   }
@@ -60,7 +60,7 @@ export class PageEditComponent implements OnInit {
     this.pageService.deletePage(this.pid)
       .subscribe(
         (page: any) => {
-          this.router.navigate(['user/' + this.userId, 'website', this.wid, 'page']);
+          this.router.navigate(['user/' + this.userId, 'application', this.wid, 'page']);
         }
       );
   }

@@ -15,9 +15,9 @@ import { RegisterComponent } from './components/user/register/register.component
 import { WebsiteNewComponent } from './components/website/website-new/website-new.component';
 import { WebsiteEditComponent } from './components/website/website-edit/website-edit.component';
 import { WebsiteListComponent } from './components/website/website-list/website-list.component';
-// import { PageNewComponent } from './components/page/page-new/page-new.component';
-// import { PageEditComponent } from './components/page/page-edit/page-edit.component';
-// import { PageListComponent } from './components/page/page-list/page-list.component';
+import { PageNewComponent } from './components/page/page-new/page-new.component';
+import { PageEditComponent } from './components/page/page-edit/page-edit.component';
+import { PageListComponent } from './components/page/page-list/page-list.component';
 // import { WidgetChooserComponent } from './components/widget/widget-chooser/widget-chooser.component';
 // import { WidgetEditComponent } from './components/widget/widget-edit/widget-edit.component';
 // import { WidgetListComponent } from './components/widget/widget-list/widget-list.component';
@@ -35,6 +35,7 @@ import { QuillEditorModule } from 'ngx-quill-editor';
 // import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
 import {SharedService} from './services/shared.service.client';
 import {AuthenticationService} from './services/authentication.service.client';
+import {PageService} from "./services/page.service.client";
 // import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 // import {FlickrService} from './services/flickr.service.client';
 // import {SortableDirective} from './directives/sortable.directive';
@@ -53,9 +54,9 @@ import {AuthenticationService} from './services/authentication.service.client';
     WebsiteNewComponent,
     WebsiteEditComponent,
     WebsiteListComponent,
-    // PageNewComponent,
-    // PageEditComponent,
-    // PageListComponent,
+    PageNewComponent,
+    PageEditComponent,
+    PageListComponent,
     // WidgetChooserComponent,
     // WidgetEditComponent,
     // WidgetListComponent,
@@ -76,7 +77,7 @@ import {AuthenticationService} from './services/authentication.service.client';
     Routing
   ],
   // Client Side services here
-  providers: [ TestService, UserService, WebsiteService, SharedService, AuthenticationService],
+  providers: [ TestService, UserService, WebsiteService, SharedService, AuthenticationService, PageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

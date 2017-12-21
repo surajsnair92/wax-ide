@@ -50,7 +50,7 @@
     <div *ngFor="let website of websites">
       <li class="list-group-item">
         <a href="#">
-          {{website.name}}
+          {{website.applicationName}}
         </a>
         <a [routerLink]="['/user', userId, 'website', website._id]"
            class="pull-right">
@@ -65,7 +65,7 @@
   <form #f="ngForm">
   <div class="dg-right-pane-items">
     <label>Name</label>
-    <input placeholder="Website Name"
+    <input placeholder="Application Name"
            name="name"
            id="name"
            type="text"
@@ -77,7 +77,7 @@
 
   <div class="dg-right-pane-items">
     <label>Description</label>
-    <textarea placeholder="Website Description"
+    <textarea placeholder="Application Description"
               name="description"
               id="description"
               type="text"

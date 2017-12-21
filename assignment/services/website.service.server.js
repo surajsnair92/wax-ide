@@ -1,51 +1,67 @@
 module.exports = function (app) {
-  var WebsiteModel = require('../model/website/website.model.server');
+  var ApplicationModel = require('../model/website/website.model.server');
 
-  app.get('/api/user/:userId/website', findAllWebsitesForUser);
-  app.post('/api/user/:userId/website', createWebsite);
-  app.get('/api/website/:websiteId', findWebsiteById);
-  app.delete('/api/website/:websiteId', deleteWebsite);
-  app.put('/api/website/:websiteId', updateWebsite);
+  app.get('/api/user/:userId/application', findAllApplicationsForUser);
+  app.post('/api/user/:userId/application', createApplication);
+  app.get('/api/application/:appId', findApplicationById);
+  app.delete('/api/application/:appId', deleteApplication);
+  app.put('/api/application/:appId', updateApplication);
+  app.put('/api/application/:appId/page', addPageToApplication);
 
-  function findAllWebsitesForUser(req, res) {
+  function findAllApplicationsForUser(req, res) {
     var userId = req.params['userId'];
-    WebsiteModel.findAllWebsitesForUser(userId)
+    ApplicationModel.findAllApplicationsForUser(userId)
       .then(function (websites) {
         res.json(websites);
       });
   }
 
-  function createWebsite(req, res) {
+  function createApplication(req, res) {
     console.log("inside web of website server");
-    var website = req.body;
-    WebsiteModel.createWebsiteForUser(website.developerId, website)
+    var application = req.body;
+    ApplicationModel.createApplicationForUser(application.developerId, application)
       .then(function (website) {
         res.json(website);
       })
   }
 
-  function deleteWebsite(req, res) {
-    var websiteId = req.params['websiteId'];
-    WebsiteModel.deleteWebsite(websiteId)
+  function deleteApplication(req, res) {
+    var appId = req.params['appId'];
+    ApplicationModel.deleteApplication(appId)
       .then(function (status) {
         res.json(status);
       })
   }
 
-  function updateWebsite(req, res) {
-    console.log('update web');
-    var websiteId = req.params['websiteId'];
-    WebsiteModel.updateWebsite(websiteId, req.body)
+  function updateApplication(req, res) {
+    var appId = req.params['appId'];
+    ApplicationModel.updateApplication(appId, req.body)
       .then(function (status) {
         res.json(status);
       })
   }
 
-  function findWebsiteById(req, res) {
-    var websiteId = req.params['websiteId'];
-    WebsiteModel.findWebsiteById(websiteId)
+  function findApplicationById(req, res) {
+    var appId = req.params['appId'];
+    ApplicationModel.findApplicationById(appId)
       .then(function (website) {
         res.json(website);
       })
+  }
+
+  function addPageToApplication(req, res) {
+      var appId = req.params['appId'];
+      var page = req.body;
+      ApplicationModel.findApplicationById(appId)
+          .then(function (application) {
+            if(application['pages']){
+                application['pages'] = page;
+            }
+            else{
+              application['pages'] = page;
+            }
+            console.log(application);
+              res.json(application);
+          })
   }
 }
