@@ -48,14 +48,15 @@ export class PageNewComponent implements OnInit {
     console.log('new page');
     this.name = this.pageForm.value.pageName;
     this.route = this.pageForm.value.pageDesc;
-    this.name = {
+    const page = {
+        name: this.name,
         route: this.route
     };
     //   const pages = {
     //       name: this.name,
     //           route: this.route
     //       };
-    this.page = this.webService.addPagesToApplication(this.wid, this.name)
+    this.page = this.webService.addPagesToApplication(this.wid, page)
         .subscribe((new_page: any) => {
             console.log(new_page);
             this.router.navigate(['user/', this.userId, 'application', this.wid, 'page']);

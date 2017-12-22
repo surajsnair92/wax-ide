@@ -54,13 +54,17 @@ module.exports = function (app) {
       var page = req.body;
       ApplicationModel.findApplicationById(appId)
           .then(function (application) {
-            if(application['pages']){
-                application['pages'] = page;
+
+              // application = application.toObject();
+            if(!application.pages){
+                application.pages = {};
             }
-            else{
-              application['pages'] = page;
-            }
-            console.log(application);
+
+            application.pages[page.name] = page;
+            return application.save();
+          })
+          .then(function (application) {
+              console.log(application);
               res.json(application);
           })
   }
