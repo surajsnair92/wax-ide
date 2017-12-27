@@ -27,10 +27,10 @@
 
 <div class="container-fluid" style="margin-top: 70px">
   <ul class="list-group">
-    <div *ngFor="let page of pages">
+    <div *ngFor="let page of mykey">
       <li class="list-group-item">
         <a [routerLink]="['/user', userId, 'website', wid, 'page', page._id, 'widget']">
-          {{page.name}}
+          {{page}}
         </a>
         <a [routerLink]="['/user', userId, 'website', wid, 'page', page._id]"
            class="pull-right">

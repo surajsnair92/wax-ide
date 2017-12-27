@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {PageService} from '../../../services/page.service.client';
+import {WebsiteService} from '../../../services/website.service.client';
 
 @Component({
   selector: 'app-page-list',
@@ -13,8 +14,13 @@ export class PageListComponent implements OnInit {
   pages = [{}];
   username: string;
   wid: string;
+  page: any;
+  pageName: string;
+  mykey: any;
+
 
   constructor(private activatedRoute: ActivatedRoute,
+              private webService: WebsiteService,
               private userService: UserService,
               private pageService: PageService) { }
 
@@ -32,12 +38,21 @@ export class PageListComponent implements OnInit {
           this.username = user.username;
         }
       );
-    this.pageService.findPageByWebsiteId(this.wid)
-      .subscribe(
-        (pages: any) => {
-          this.pages = pages;
-        }
-      );
+      this.webService.findApplicationById(this.wid)
+          .subscribe((websites: any) => {
+                this.page = websites;
+                this.pageName = this.page.pages;
+                this.mykey = Object.keys(this.pageName);
+                  console.log(websites);
+      });
+    // this.pageService.findPageByWebsiteId(this.wid)
+    //   .subscribe(
+    //     (pages: any) => {
+    //       this.pages = pages;
+    //       this.page = pages;
+    //       console.log(this.pages);
+    //     }
+    //   );
   }
 
 }

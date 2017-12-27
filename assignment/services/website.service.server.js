@@ -49,6 +49,7 @@ module.exports = function (app) {
       })
   }
 
+
   function addPageToApplication(req, res) {
       var appId = req.params['appId'];
       var page = req.body;
@@ -59,12 +60,10 @@ module.exports = function (app) {
             if(!application.pages){
                 application.pages = {};
             }
-
             application.pages[page.name] = page;
             return application.save();
           })
           .then(function (application) {
-              console.log(application);
               res.json(application);
           })
   }
