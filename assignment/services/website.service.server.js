@@ -61,6 +61,8 @@ module.exports = function (app) {
                 application.pages = {};
             }
             application.pages[page.name] = page;
+            console.log(application);
+            application.markModified('pages');
             return application.save();
           })
           .then(function (application) {
