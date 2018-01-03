@@ -87,7 +87,7 @@
            id = "pageName"
            type="text"
            class="form-control"
-           [(ngModel)]="page['name']"
+           [(ngModel)]= pid
            required
            #username="ngModel"/>
   </div>
@@ -99,7 +99,7 @@
               id = "pageDesc"
               type="text"
               class="form-control"
-              [(ngModel)]="page['description']"
+              [(ngModel)]=route
               required
               #username="ngModel"></textarea>
   </div>

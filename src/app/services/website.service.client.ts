@@ -81,5 +81,12 @@ export class WebsiteService {
               return data;
           });
   }
+  deletePage(appId, pid) {
+        return this.http.delete(this.baseUrl + '/api/application/' + appId + '/page/' + pid)
+            .map((res: Response) => {
+                    const data = res.json();
+                    return data;
+                });
+    }
 
 }

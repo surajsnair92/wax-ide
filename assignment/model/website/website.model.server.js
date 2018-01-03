@@ -31,7 +31,10 @@ function findAllApplicationsForUser(userId) {
 function deleteApplication(id) {
   return ApplicationModel.remove({_id: id});
 }
+function deletePage(pid) {
+  return ApplicationModel.remove
 
+}
 function updateApplication(id, application) {
   console.log('inside update of web');
   return ApplicationModel.update({_id: id}, application);

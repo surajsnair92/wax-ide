@@ -4,6 +4,7 @@ module.exports = function (app) {
   app.get('/api/user/:userId/application', findAllApplicationsForUser);
   app.post('/api/user/:userId/application', createApplication);
   app.get('/api/application/:appId', findApplicationById);
+  app.delete('/api/application/:appId/page/:pid', deletePage);
   app.delete('/api/application/:appId', deleteApplication);
   app.put('/api/application/:appId', updateApplication);
   app.put('/api/application/:appId/page', addPageToApplication);
@@ -88,5 +89,18 @@ module.exports = function (app) {
               res.json(application);
           });
   }
-
+  function deletePage(req,res) {
+      var appId = req.params['appId'];
+      var pageName = req.params['pid'];
+      ApplicationModel.findApplicationById(appId)
+          .then(function (application) {
+              delete application.pages[pageName];
+              application.markModified('pages');
+              return application.save();
+          })
+          .then(function (application) {
+              res.json(application);
+          });
+      
+  }
 }

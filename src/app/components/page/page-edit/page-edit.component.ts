@@ -21,6 +21,7 @@ export class PageEditComponent implements OnInit {
   wid: string;
   mykey: any;
   pageName: string;
+  route: string;
 
   constructor(private pageService: PageService,
               private webService: WebsiteService,
@@ -48,7 +49,8 @@ export class PageEditComponent implements OnInit {
               this.page = websites;
               this.pageName = this.page.pages;
               this.mykey = Object.keys(this.pageName);
-              console.log(websites);
+              this.route = this.pageName[this.pid].route;
+              console.log(this.pageName);
           });
   }
 
@@ -62,9 +64,8 @@ export class PageEditComponent implements OnInit {
   }
 
   delete() {
-    this.pageService.deletePage(this.pid)
-      .subscribe(
-        (page: any) => {
+    this.webService.deletePage(this.wid, this.pid)
+      .subscribe((page: any) => {
           this.router.navigate(['user/' + this.userId, 'application', this.wid, 'page']);
         }
       );
