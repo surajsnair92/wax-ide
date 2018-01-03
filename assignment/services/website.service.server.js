@@ -7,6 +7,8 @@ module.exports = function (app) {
   app.delete('/api/application/:appId', deleteApplication);
   app.put('/api/application/:appId', updateApplication);
   app.put('/api/application/:appId/page', addPageToApplication);
+  app.put('/api/application/:appId/page/:pid/widget', addWidgetsToPage);
+
 
   function findAllApplicationsForUser(req, res) {
     var userId = req.params['userId'];
@@ -67,6 +69,24 @@ module.exports = function (app) {
           })
           .then(function (application) {
               res.json(application);
-          })
+          });
   }
+  function addWidgetsToPage(req, res) {
+      var appId = req.params['appId'];
+      var pageName = req.params['pid'];
+      var widget = req.body;
+      ApplicationModel.findApplicationById(appId)
+          .then(function (application) {
+              if(!application.pages[pageName].widgets){
+                  application.pages[pageName].widgets = [];
+              }
+              application.pages[pageName].widgets.push(widget);
+              application.markModified('pages');
+              return application.save();
+          })
+          .then(function (application) {
+              res.json(application);
+          });
+  }
+
 }

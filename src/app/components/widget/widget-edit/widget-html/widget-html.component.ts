@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {WebsiteService} from '../../../../services/website.service.client'
 
 @Component({
   selector: 'app-widget-html',
@@ -14,11 +15,12 @@ export class WidgetHtmlComponent implements OnInit {
   wid: string;
   pid: string;
   wgid: string;
-  widget = {};
+  widget: any;
   widgets = [{}];
 
   constructor(private widgetService: WidgetService,
               private activatedRoutes: ActivatedRoute,
+              private webService: WebsiteService,
               private router: Router) {
   }
 
@@ -27,6 +29,7 @@ export class WidgetHtmlComponent implements OnInit {
       this.userId = params['userId'];
       this.wid = params['wid'];
       this.pid = params['pid'];
+      console.log(this.pid);
       this.wgid = params['wgid'];
       this.widgetService.findWidgetById(this.wgid)
         .subscribe(
@@ -39,15 +42,17 @@ export class WidgetHtmlComponent implements OnInit {
   }
 
   create() {
-    this.widget['type'] = 'HTML';
-    this.widget['text'] = this.text;
-    this.widgetService.createWidget(this.pid, this.widget)
-      .subscribe((data) => {
-        if (data) {
-          this.widget = data;
-          this.router.navigate(['/user', this.userId, 'website', this.wid, 'page', this.pid, 'widget']);
-        }
-      });
+    const widget = {
+      type: 'HTML',
+      html: this.text
+    };
+    this.webService.addWidgetsToPage(this.wid, this.pid, widget)
+        .subscribe((data) => {
+          if (data) {
+            this.widget = data;
+            this.router.navigate(['/user', this.userId, 'application', this.wid, 'page', this.pid, 'widget']);
+          }
+        });
   }
 
   update() {
@@ -56,7 +61,7 @@ export class WidgetHtmlComponent implements OnInit {
     this.widgetService.updateWidget(this.wgid, this.widget)
       .subscribe(
         (widgets: any) => {
-          this.router.navigate(['user/' + this.userId, 'website', this.wid, 'page', this.pid, 'widget']);
+          this.router.navigate(['/user' + this.userId, 'website', this.wid, 'page', this.pid, 'widget']);
         }
       );
   }

@@ -14,6 +14,7 @@ export class PageListComponent implements OnInit {
   pages = [{}];
   username: string;
   wid: string;
+  pid: string;
   page: any;
   pageName: string;
   mykey: any;
@@ -43,7 +44,8 @@ export class PageListComponent implements OnInit {
                 this.page = websites;
                 this.pageName = this.page.pages;
                 this.mykey = Object.keys(this.pageName);
-                  console.log(websites);
+                this.pid = this.page._id;
+
       });
     // this.pageService.findPageByWebsiteId(this.wid)
     //   .subscribe(

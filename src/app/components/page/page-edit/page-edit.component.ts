@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {PageService} from '../../../services/page.service.client';
+import {WebsiteService} from '../../../services/website.service.client';
 
 @Component({
   selector: 'app-page-edit',
@@ -12,14 +13,17 @@ import {PageService} from '../../../services/page.service.client';
 export class PageEditComponent implements OnInit {
   @ViewChild('f') pageEditForm: NgForm;
   userId: string;
-  page = {};
+  page: any;
   pages = [{}];
   name: string;
   description: string;
   pid: string;
   wid: string;
+  mykey: any;
+  pageName: string;
 
   constructor(private pageService: PageService,
+              private webService: WebsiteService,
               private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private router: Router) { }
@@ -39,12 +43,13 @@ export class PageEditComponent implements OnInit {
           this.page = page;
         }
       );
-    this.pageService.findPageByWebsiteId(this.wid)
-      .subscribe(
-        (pages: any) => {
-          this.pages = pages;
-        }
-      );
+      this.webService.findApplicationById(this.wid)
+          .subscribe((websites: any) => {
+              this.page = websites;
+              this.pageName = this.page.pages;
+              this.mykey = Object.keys(this.pageName);
+              console.log(websites);
+          });
   }
 
   update() {

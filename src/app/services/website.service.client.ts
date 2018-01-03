@@ -74,5 +74,12 @@ export class WebsiteService {
                   return data;
               });
   }
+  addWidgetsToPage(appId, pid, widget) {
+      return this.http.put(this.baseUrl + '/api/application/' + appId + '/page/' + pid + '/widget', widget)
+          .map((res: Response) => {
+              const data = res.json();
+              return data;
+          });
+  }
 
 }

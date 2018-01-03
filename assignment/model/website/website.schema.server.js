@@ -5,7 +5,7 @@ var applicationSchema = mongoose.Schema({
   applicationName: String,
   description: String,
   dateCreated: {type: Date,default: Date.now()},
-  pages: Object
+  pages: Object,
   // pages:[{type:mongoose.Schema.Types.ObjectId, ref:'PageModel'}]
 },{collection: "application"});
 

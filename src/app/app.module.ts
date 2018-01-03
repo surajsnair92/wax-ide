@@ -18,9 +18,10 @@ import { WebsiteListComponent } from './components/website/website-list/website-
 import { PageNewComponent } from './components/page/page-new/page-new.component';
 import { PageEditComponent } from './components/page/page-edit/page-edit.component';
 import { PageListComponent } from './components/page/page-list/page-list.component';
-// import { WidgetChooserComponent } from './components/widget/widget-chooser/widget-chooser.component';
+import { WidgetChooserComponent } from './components/widget/widget-chooser/widget-chooser.component';
 // import { WidgetEditComponent } from './components/widget/widget-edit/widget-edit.component';
-// import { WidgetListComponent } from './components/widget/widget-list/widget-list.component';
+import { WidgetListComponent } from './components/widget/widget-list/widget-list.component';
+import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
 // import { WidgetHeaderComponent } from './components/widget/widget-edit/widget-header/widget-header.component';
 // import { WidgetImageComponent } from './components/widget/widget-edit/widget-image/widget-image.component';
 // import { WidgetYoutubeComponent } from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
@@ -35,7 +36,8 @@ import { QuillEditorModule } from 'ngx-quill-editor';
 // import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html/widget-html.component';
 import {SharedService} from './services/shared.service.client';
 import {AuthenticationService} from './services/authentication.service.client';
-import {PageService} from "./services/page.service.client";
+import {PageService} from './services/page.service.client';
+import {WidgetService} from './services/widget.service.client';
 // import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 // import {FlickrService} from './services/flickr.service.client';
 // import {SortableDirective} from './directives/sortable.directive';
@@ -57,15 +59,15 @@ import {PageService} from "./services/page.service.client";
     PageNewComponent,
     PageEditComponent,
     PageListComponent,
-    // WidgetChooserComponent,
+    WidgetChooserComponent,
     // WidgetEditComponent,
-    // WidgetListComponent,
+    WidgetListComponent,
     // WidgetHeaderComponent,
     // WidgetImageComponent,
     // WidgetYoutubeComponent,
     LandingComponent,
     // WidgetTextComponent,
-    // WidgetHtmlComponent,
+    WidgetHtmlComponent,
     // FlickrImageSearchComponent,
     // SortableDirective
   ],
@@ -77,7 +79,7 @@ import {PageService} from "./services/page.service.client";
     Routing
   ],
   // Client Side services here
-  providers: [ TestService, UserService, WebsiteService, SharedService, AuthenticationService, PageService],
+  providers: [ TestService, UserService, WebsiteService, SharedService, AuthenticationService, PageService, WidgetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

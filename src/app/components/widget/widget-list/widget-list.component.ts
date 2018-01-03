@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {WidgetService} from '../../../services/widget.service.client';
 import { DomSanitizer } from '@angular/platform-browser';
+import {WebsiteService} from '../../../services/website.service.client';
+
 
 @Component({
   selector: 'app-widget-list',
@@ -11,15 +13,20 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class WidgetListComponent implements OnInit {
   userId: string;
-  widgets = [{}];
+  widgets: [{}];
   wid: string;
   pid: string;
   user: any;
+  page: any;
+  pageName: any;
+
 
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private widgetService: WidgetService,
+              private webService: WebsiteService,
               public sanitizer: DomSanitizer) { }
+
 
   ngOnInit() {
     this.activatedRoute.params
@@ -30,12 +37,13 @@ export class WidgetListComponent implements OnInit {
           this.pid = params['pid'];
         }
       );
-    this.widgetService.findWidgetsByPageId(this.pid)
-      .subscribe(
-        (widgets: any) => {
-          this.widgets = widgets;
-        }
-      );
+      this.webService.findApplicationById(this.wid)
+          .subscribe((websites: any) => {
+              this.page = websites;
+              this.pageName = this.page.pages;
+              this.widgets = this.pageName[this.pid].widgets;
+              console.log(this.widgets);
+          });
   }
 
   updatePosition(event: Object) {
