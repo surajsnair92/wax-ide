@@ -9,6 +9,8 @@ module.exports = function (app) {
   app.put('/api/application/:appId', updateApplication);
   app.put('/api/application/:appId/page', addPageToApplication);
   app.put('/api/application/:appId/page/:pid/widget', addWidgetsToPage);
+  app.put('/api/application/:appId/currPage/:currId/page/:pid', updatePage);
+
 
 
   function findAllApplicationsForUser(req, res) {
@@ -75,6 +77,7 @@ module.exports = function (app) {
   function addWidgetsToPage(req, res) {
       var appId = req.params['appId'];
       var pageName = req.params['pid'];
+
       var widget = req.body;
       ApplicationModel.findApplicationById(appId)
           .then(function (application) {
@@ -101,6 +104,25 @@ module.exports = function (app) {
           .then(function (application) {
               res.json(application);
           });
-      
+  }
+
+  function updatePage(req, res) {
+      var appId = req.params['appId'];
+      var pageName = req.params['pid'];
+      var currPage = req.params['currId'];
+      var page = req.body;
+      ApplicationModel.findApplicationById(appId)
+          .then(function (application) {
+              delete application.pages[currPage];
+              if(!application.pages){
+                  application.pages = {};
+              }
+              application.pages[pageName] = page;
+              application.markModified('pages');
+              return application.save();
+          })
+          .then(function (application) {
+              res.json(application);
+          });
   }
 }

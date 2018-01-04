@@ -55,8 +55,7 @@ export class WebsiteService {
       .map((res: Response) => {
           const data = res.json();
           return data;
-        }
-      );
+        });
   }
 
   deleteApplication(appId: String) {
@@ -87,6 +86,13 @@ export class WebsiteService {
                     const data = res.json();
                     return data;
                 });
+    }
+    updatePage(currPage, appId, pid, page) {
+        return this.http.put(this.baseUrl + '/api/application/' + appId + '/currPage/' + currPage + '/page/' + pid, page)
+            .map((res: Response) => {
+                const data = res.json();
+                return data;
+            });
     }
 
 }
