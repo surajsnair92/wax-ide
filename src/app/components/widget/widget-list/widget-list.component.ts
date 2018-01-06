@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {WidgetService} from '../../../services/widget.service.client';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -19,13 +19,15 @@ export class WidgetListComponent implements OnInit {
   user: any;
   page: any;
   pageName: any;
+  index: any;
 
 
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private widgetService: WidgetService,
               private webService: WebsiteService,
-              public sanitizer: DomSanitizer) { }
+              public sanitizer: DomSanitizer,
+              private router: Router) { }
 
 
   ngOnInit() {
@@ -46,15 +48,38 @@ export class WidgetListComponent implements OnInit {
           });
   }
 
-  updatePosition(event: Object) {
-    this.widgetService.updateWidgetPosition(this.pid, event['startIndex'], event['endIndex'])
-      .subscribe((data) => {
-        if (data && data.success === true) {
-          console.log('success');
-        }else {
-          console.log('error in updating position');
-        }
-      });
-  }
+  // updatePosition(event: Object) {
+  //   this.widgetService.updateWidgetPosition(this.pid, event['startIndex'], event['endIndex'])
+  //     .subscribe((data) => {
+  //       if (data && data.success === true) {
+  //         console.log('success');
+  //       }else {
+  //         console.log('error in updating position');
+  //       }
+  //     });
+  // }
+
+    delete(widget) {
+        const index = this.widgets.findIndex(function(item){
+            return item === widget;
+        });
+
+        this.webService.deleteWidget(this.wid, this.pid, index)
+            .subscribe(
+                (widgets: any) => {
+                    console.log(this.widgets);
+                    this.router.navigate(['user/' + this.userId, 'application', this.wid, 'page', this.pid, 'widget']);
+                }
+            );
+    }
+
+    goToEdit(widget) {
+      // console.log(widget.html);
+        this.index = this.widgets.findIndex(function(item){
+            return item === widget;
+        });
+        console.log(this.index);
+        this.router.navigate(['user/' + this.userId, 'application', this.wid, 'page', this.pid, 'widget', this.index]);
+    }
 
 }

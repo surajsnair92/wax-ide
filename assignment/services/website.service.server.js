@@ -10,6 +10,7 @@ module.exports = function (app) {
   app.put('/api/application/:appId/page', addPageToApplication);
   app.put('/api/application/:appId/page/:pid/widget', addWidgetsToPage);
   app.put('/api/application/:appId/currPage/:currId/page/:pid', updatePage);
+  app.delete('/api/application/:appId/page/:pid/widget/:widgetIndex', deleteWidget);
 
 
 
@@ -118,6 +119,25 @@ module.exports = function (app) {
                   application.pages = {};
               }
               application.pages[pageName] = page;
+              application.markModified('pages');
+              return application.save();
+          })
+          .then(function (application) {
+              res.json(application);
+          });
+  }
+
+  function deleteWidget(req, res) {
+      var appId = req.params['appId'];
+      var pageName = req.params['pid'];
+      var widgetIndex = req.params['widgetIndex'];
+      ApplicationModel.findApplicationById(appId)
+          .then(function (application) {
+              // application.pages[pageName].widgets.splice(widgetIndex,1);
+              console.log(application.pages[pageName].widgets[widgetIndex]);
+              // delete application.pages[pageName].widgets[widgetIndex];
+              application.pages[pageName].widgets.splice(widgetIndex,1);
+              console.log(application.pages[pageName].widgets[widgetIndex]);
               application.markModified('pages');
               return application.save();
           })

@@ -26,11 +26,13 @@ export class WidgetEditComponent implements OnInit {
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
       this.widgetId = params['wgid'];
+      console.log('Hello from widget edit')
       this.widgetService.findWidgetById(this.widgetId)
         .subscribe(
           (widget: any) => {
             this.widget = widget;
             this.type = widget.type;
+            // console.log(widget.html);
           }
         );
     });

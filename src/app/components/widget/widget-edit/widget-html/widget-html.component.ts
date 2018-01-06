@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
-import {WebsiteService} from '../../../../services/website.service.client'
+import {WebsiteService} from '../../../../services/website.service.client';
 
 @Component({
   selector: 'app-widget-html',

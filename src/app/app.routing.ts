@@ -24,6 +24,7 @@ import {WidgetChooserComponent} from './components/widget/widget-chooser/widget-
 // import {WidgetTextComponent} from './components/widget/widget-edit/widget-text/widget-text.component';
 import {WidgetHtmlComponent} from './components/widget/widget-edit/widget-html/widget-html.component';
 import {AuthenticationService} from './services/authentication.service.client';
+import {WidgetEditComponent} from "./components/widget/widget-edit/widget-edit.component";
 // import {FlickrImageSearchComponent} from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 
 
@@ -44,7 +45,7 @@ const APP_ROUTES: Routes = [
   {path : 'user/:userId/application/:wid/page/:pid' , component: PageEditComponent},
   {path : 'user/:userId/application/:wid/page/:pid/widget' , component: WidgetListComponent},
   {path : 'user/:userId/application/:wid/page/:pid/widget/new' , component: WidgetChooserComponent},
-  // {path : 'user/:userId/website/:wid/page/:pid/widget/:wgid' , component: WidgetEditComponent},
+  {path : 'user/:userId/application/:wid/page/:pid/widget/:wgid' , component: WidgetEditComponent},
   // {path : 'user/:userId/website/:wid/page/:pid/widget/new/heading' , component: WidgetHeaderComponent},
   // {path : 'user/:userId/website/:wid/page/:pid/widget/new/image' , component: WidgetImageComponent},
   // {path : 'user/:userId/website/:wid/page/:pid/widget/new/youtube' , component: WidgetYoutubeComponent},

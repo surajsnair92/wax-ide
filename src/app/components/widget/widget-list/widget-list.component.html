@@ -74,7 +74,7 @@
               <img [style.width]="widget['width']">
             </a>
             <div class="dg-widget-toolbar">
-              <a [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget', widget['_id']]">
+              <a [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget', widget]">
                 <span class="glyphicon glyphicon-cog"></span>
               </a>
               <span class="glyphicon glyphicon-menu-hamburger"></span>
@@ -90,9 +90,13 @@
             </div>
             <div class="dg-widget-toolbar">
               <!--<a [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget', widget['_id']]">-->
-                <!--<span class="glyphicon glyphicon-cog"></span>-->
-              <!--</a>-->
-              <span class="glyphicon glyphicon-menu-hamburger"></span>
+              <a (click)="goToEdit(widget)">
+                <span class="glyphicon glyphicon-cog"></span>
+              </a>
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+              <a (click)="delete(widget)">Delete</a>
+              <!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
+              <!--<span class="glyphicon glyphicon-cog"></span>-->
             </div>
           </div>
         </div>
@@ -116,7 +120,6 @@
               <a [routerLink]="['/user', userId, 'website', wid, 'page', pid, 'widget', widget['_id']]">
                 <span class="glyphicon glyphicon-cog"></span>
               </a>
-              <span class="glyphicon glyphicon-menu-hamburger"></span>
             </div>
           </div>
         </div>

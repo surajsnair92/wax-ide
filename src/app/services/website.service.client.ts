@@ -95,4 +95,13 @@ export class WebsiteService {
             });
     }
 
+    deleteWidget(appId, pid, widget) {
+      console.log(widget);
+        return this.http.delete(this.baseUrl + '/api/application/' + appId + '/page/' + pid + '/widget/' + widget)
+            .map((res: Response) => {
+                const data = res.json();
+                return data;
+            });
+    }
+
 }

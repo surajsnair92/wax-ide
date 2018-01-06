@@ -38,8 +38,12 @@ import {SharedService} from './services/shared.service.client';
 import {AuthenticationService} from './services/authentication.service.client';
 import {PageService} from './services/page.service.client';
 import {WidgetService} from './services/widget.service.client';
-// import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
-// import {FlickrService} from './services/flickr.service.client';
+import {WidgetEditComponent} from './components/widget/widget-edit/widget-edit.component';
+import {WidgetHeaderComponent} from './components/widget/widget-edit/widget-header/widget-header.component';
+import {WidgetImageComponent} from './components/widget/widget-edit/widget-image/widget-image.component';
+import {WidgetYoutubeComponent} from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
+import {WidgetTextComponent} from './components/widget/widget-edit/widget-text/widget-text.component';
+
 // import {SortableDirective} from './directives/sortable.directive';
 
 
@@ -60,13 +64,13 @@ import {WidgetService} from './services/widget.service.client';
     PageEditComponent,
     PageListComponent,
     WidgetChooserComponent,
-    // WidgetEditComponent,
+    WidgetEditComponent,
     WidgetListComponent,
-    // WidgetHeaderComponent,
-    // WidgetImageComponent,
-    // WidgetYoutubeComponent,
+    WidgetHeaderComponent,
+    WidgetImageComponent,
+    WidgetYoutubeComponent,
     LandingComponent,
-    // WidgetTextComponent,
+    WidgetTextComponent,
     WidgetHtmlComponent,
     // FlickrImageSearchComponent,
     // SortableDirective
