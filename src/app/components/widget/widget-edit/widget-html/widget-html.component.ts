@@ -61,7 +61,7 @@ export class WidgetHtmlComponent implements OnInit {
     this.webService.updateWidget(this.wid, this.pid, this.wgid, this.widget)
       .subscribe(
         (widgets: any) => {
-          this.router.navigate(['/user' + this.userId, 'website', this.wid, 'page', this.pid, 'widget']);
+          this.router.navigate(['/user' + this.userId, 'application', this.wid, 'page', this.pid, 'widget']);
         }
       );
   }
