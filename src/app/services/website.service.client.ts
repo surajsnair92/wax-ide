@@ -104,4 +104,21 @@ export class WebsiteService {
             });
     }
 
+    findWidgetByIndex(appId, pid, widgetIndex) {
+        return this.http.get(this.baseUrl + '/api/application/' + appId + '/page/' + pid + '/widget/' + widgetIndex)
+            .map((res: Response) => {
+                return res.json();
+            });
+    }
+
+    updateWidget(appId, pid, widgetIndex, widget) {
+      console.log(widgetIndex);
+      console.log(widget);
+        return this.http.put(this.baseUrl + '/api/application/' + appId + '/page/' + pid + '/widget/' + widgetIndex, widget)
+            .map((res: Response) => {
+                const data = res.json();
+                return data;
+            });
+    }
+
 }

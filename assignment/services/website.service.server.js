@@ -11,7 +11,8 @@ module.exports = function (app) {
   app.put('/api/application/:appId/page/:pid/widget', addWidgetsToPage);
   app.put('/api/application/:appId/currPage/:currId/page/:pid', updatePage);
   app.delete('/api/application/:appId/page/:pid/widget/:widgetIndex', deleteWidget);
-
+  app.get('/api/application/:appId/page/:pid/widget/:widgetIndex', findWidgetByIndex);
+  app.put('/api/application/:appId/page/:pid/widget/:widgetIndex', updateWidget);
 
 
   function findAllApplicationsForUser(req, res) {
@@ -144,5 +145,29 @@ module.exports = function (app) {
           .then(function (application) {
               res.json(application);
           });
+  }
+
+  function findWidgetByIndex(req, res) {
+      var appId = req.params['appId'];
+      var pageName = req.params['pid'];
+      var widgetIndex = req.params['widgetIndex'];
+      ApplicationModel.findApplicationById(appId)
+          .then(function (application) {
+              var widget = application.pages[pageName].widgets[widgetIndex];
+              res.json(widget);
+          })
+  }
+
+  function updateWidget(req, res) {
+      var appId = req.params['appId'];
+      var pageName = req.params['pid'];
+      var widgetIndex = req.params['widgetIndex'];
+      var updatedWidget = req.body;
+      ApplicationModel.findApplicationById(appId)
+          .then(function (application) {
+              application.pages[pageName].widgets[widgetIndex] = updatedWidget;
+              application.markModified('pages');
+              return application.save();
+          })
   }
 }

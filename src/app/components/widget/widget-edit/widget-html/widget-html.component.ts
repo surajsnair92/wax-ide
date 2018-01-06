@@ -29,13 +29,13 @@ export class WidgetHtmlComponent implements OnInit {
       this.userId = params['userId'];
       this.wid = params['wid'];
       this.pid = params['pid'];
-      console.log(this.pid);
+      // console.log(this.pid);
       this.wgid = params['wgid'];
-      this.widgetService.findWidgetById(this.wgid)
+      this.webService.findWidgetByIndex(this.wid, this.pid, this.wgid)
         .subscribe(
           (widget: any) => {
             this.widget = widget;
-            this.text = widget['text'];
+            this.text = widget['html'];
           }
         );
     });
@@ -56,9 +56,9 @@ export class WidgetHtmlComponent implements OnInit {
   }
 
   update() {
-    this.widget['widgetType'] = 'HTML';
-    this.widget['text'] = this.text;
-    this.widgetService.updateWidget(this.wgid, this.widget)
+    this.widget['type'] = 'HTML';
+    this.widget['html'] = this.text;
+    this.webService.updateWidget(this.wid, this.pid, this.wgid, this.widget)
       .subscribe(
         (widgets: any) => {
           this.router.navigate(['/user' + this.userId, 'website', this.wid, 'page', this.pid, 'widget']);
@@ -67,10 +67,10 @@ export class WidgetHtmlComponent implements OnInit {
   }
 
   delete() {
-    this.widgetService.deleteWidget(this.wgid)
+    this.webService.deleteWidget(this.wid, this.pid, this.wgid)
       .subscribe(
         (widgets: any) => {
-          this.router.navigate(['user/' + this.userId, 'website', this.wid, 'page', this.pid, 'widget']);
+          this.router.navigate(['user/' + this.userId, 'application', this.wid, 'page', this.pid, 'widget']);
         }
       );
   }
