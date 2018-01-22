@@ -59,19 +59,15 @@ export class WidgetHtmlComponent implements OnInit {
     this.widget['type'] = 'HTML';
     this.widget['html'] = this.text;
     this.webService.updateWidget(this.wid, this.pid, this.wgid, this.widget)
-      .subscribe(
-        (widgets: any) => {
-          this.router.navigate(['/user' + this.userId, 'application', this.wid, 'page', this.pid, 'widget']);
-        }
-      );
+      .subscribe((widgets: any) => {
+        this.router.navigate(['/user' , this.userId, 'application', this.wid, 'page', this.pid, 'widget']);
+        });
   }
 
   delete() {
     this.webService.deleteWidget(this.wid, this.pid, this.wgid)
-      .subscribe(
-        (widgets: any) => {
+      .subscribe((widgets: any) => {
           this.router.navigate(['user/' + this.userId, 'application', this.wid, 'page', this.pid, 'widget']);
-        }
-      );
+        });
   }
 }
